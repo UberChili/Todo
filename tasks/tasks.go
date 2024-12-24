@@ -22,12 +22,12 @@ func (t *Tasks) New(description string) error {
 	return nil
 }
 
-func (t Tasks) ListAsSlice() []string {
+func (t Tasks) ListAsSlice() ([]string, error) {
 	var tasks []string
 	for _, task := range t.tasks {
 		tasks = append(tasks, task.description)
 	}
-	return tasks
+	return tasks, nil
 }
 
 func (t *Tasks) GetTasksFromFile(file string) error {
