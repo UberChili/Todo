@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+const filePath = "test.md"
+
 func TestNewTask(t *testing.T) {
 	tasks := Tasks{}
 
@@ -15,13 +17,6 @@ func TestNewTask(t *testing.T) {
 	})
 
 }
-
-// func TestReadTasksFromFile(t *testing.T) {
-// 	task := Tasks{}
-//
-// 	t.Run("Reading tasks from an existing file", func(t *testing.T) {
-// 	})
-// }
 
 func TestReadTasks(t *testing.T) {
 	tasks := Tasks{}

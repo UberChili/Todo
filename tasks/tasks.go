@@ -1,11 +1,6 @@
 package tasks
 
-import (
-	"errors"
-	// "time"
-)
-
-const filePath = "test.md"
+import "errors"
 
 type Tasks struct {
 	tasks []Task
@@ -14,7 +9,6 @@ type Tasks struct {
 type Task struct {
 	id          int
 	description string
-	// time        string
 }
 
 func (t *Tasks) New(description string) error {
@@ -22,8 +16,6 @@ func (t *Tasks) New(description string) error {
 		return errors.New("Error: Can't add an empy task.")
 	}
 
-	// currentTime := time.Now().Format("01-02-2006 15:04")
-	// task := Task{id: len(t.tasks) + 1, description: description, time: currentTime}
 	task := Task{id: len(t.tasks) + 1, description: description}
 	t.tasks = append(t.tasks, task)
 
@@ -36,4 +28,8 @@ func (t Tasks) ListAsSlice() []string {
 		tasks = append(tasks, task.description)
 	}
 	return tasks
+}
+
+func (t *Tasks) GetTasksFromFile(file string) error {
+	return nil
 }
