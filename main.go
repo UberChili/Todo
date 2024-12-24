@@ -1,12 +1,13 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
 )
 
 func main() {
-	args := os.Args[1:]
+	taskPtr := flag.String("add", "", "A new task to add (use quotes for multiple words, e.g., -add \"Buy groceries\")")
+	flag.Parse()
 
-	fmt.Println(args)
+	fmt.Println(*taskPtr)
 }
