@@ -3,3 +3,9 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 - [ ] Buy eggs
 - [ ] Buy milk
+
+When we read or list tasks, I want the program to detect only the existing lines that are tasks, denoted by the slash and square brackets.
+When adding a new task, it should be added as a new line with the correct syntax (slash and square brackets).
+If a task is marked as completed, the program must update said task in the file as well. For example:
+
+- [x] Start working on todo CLI app
