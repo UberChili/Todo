@@ -1,6 +1,13 @@
 package tasks
 
-import "errors"
+import (
+	"bufio"
+	"errors"
+	"os"
+	"strings"
+)
+
+var ErrCouldNotReadFile = errors.New("Error: Could not read tasks from file")
 
 type Tasks struct {
 	tasks []Task
@@ -30,6 +37,35 @@ func (t Tasks) ListAsSlice() ([]string, error) {
 	return tasks, nil
 }
 
-func (t *Tasks) GetTasksFromFile(file string) error {
+func (t *Tasks) ReadFromFile(fileName string) error {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return ErrCouldNotReadFile
+	}
+	defer file.Close()
+
+	reader := bufio.NewReader(file)
+
+	// Read line by line
+	for {
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
+		if CheckForTask(line) {
+			formatted := strings.TrimSuffix(strings.TrimPrefix(line, "- [ ]"), "\n")
+			task := Task{len(t.tasks) + 1, formatted}
+			t.tasks = append(t.tasks, task)
+		}
+	}
+
 	return nil
+}
+
+func CheckForTask(line string) bool {
+	prefix := "- [ ]"
+	if !strings.HasPrefix(line, prefix) {
+		return false
+	}
+	return true
 }
