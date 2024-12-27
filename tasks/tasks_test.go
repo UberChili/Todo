@@ -25,7 +25,6 @@ func TestNewTask(t *testing.T) {
 }
 
 func TestReadTasks(t *testing.T) {
-
 	t.Run("Reading from simple strings", func(t *testing.T) {
 		tasks := Tasks{}
 
@@ -55,16 +54,17 @@ func TestReadTasks(t *testing.T) {
 	t.Run("Reading from a file", func(t *testing.T) {
 		tasks := Tasks{}
 
-		want := []string{one_task, another_task}
-
 		err := tasks.ReadFromFile(filePath)
 		if err != nil {
 			t.Errorf("%q", err)
 		}
 
-		got := tasks.tasks
-		if !reflect.DeepEqual(got, want) {
-			t.Errorf("Got %q, got %q", got, want)
+		example := "Buy eggs"
+		another_example := "Buy milk"
+		want := Tasks{[]Task{{1, example}, {2, another_example}}}
+
+		if !reflect.DeepEqual(tasks, want) {
+			t.Errorf("Got %q, want %q", tasks, want)
 		}
 	})
 }

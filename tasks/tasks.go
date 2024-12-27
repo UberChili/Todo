@@ -46,14 +46,14 @@ func (t *Tasks) ReadFromFile(fileName string) error {
 
 	reader := bufio.NewReader(file)
 
-	// Read line by line
+	// Read line by line, check if task exists, create task and append to slice
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
 			break
 		}
 		if CheckForTask(line) {
-			formatted := strings.TrimSuffix(strings.TrimPrefix(line, "- [ ]"), "\n")
+			formatted := strings.TrimSuffix(strings.TrimPrefix(line, "- [ ] "), "\n")
 			task := Task{len(t.tasks) + 1, formatted}
 			t.tasks = append(t.tasks, task)
 		}
