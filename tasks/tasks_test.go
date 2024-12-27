@@ -59,9 +59,7 @@ func TestReadTasks(t *testing.T) {
 			t.Errorf("%q", err)
 		}
 
-		example := "Buy eggs"
-		another_example := "Buy milk"
-		want := Tasks{[]Task{{1, example}, {2, another_example}}}
+		want := Tasks{[]Task{{1, one_task}, {2, another_task}}}
 
 		if !reflect.DeepEqual(tasks, want) {
 			t.Errorf("Got %q, want %q", tasks, want)
