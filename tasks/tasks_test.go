@@ -21,7 +21,6 @@ func TestNewTask(t *testing.T) {
 			t.Errorf("%q", got)
 		}
 	})
-
 }
 
 func TestReadTasks(t *testing.T) {
