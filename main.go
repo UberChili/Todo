@@ -10,4 +10,6 @@ func main() {
 	flag.Parse()
 
 	fmt.Println(*taskPtr)
+
+	fmt.Println("Hello there!")
 }

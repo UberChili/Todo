@@ -8,4 +8,4 @@ When we read or list tasks, I want the program to detect only the existing lines
 When adding a new task, it should be added as a new line with the correct syntax (slash and square brackets).
 If a task is marked as completed, the program must update said task in the file as well. For example:
 
-- [x] Start working on todo CLI app
+- [ ] Start working on todo CLI app
