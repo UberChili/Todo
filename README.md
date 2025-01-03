@@ -1,5 +1,5 @@
 # Introduction
-This is a personal project I've been interested to work in for a while.
+This is a personal project.
 
 The basic idea is to tackle the classic to-do application but with a CLI functionality instead of the typical method of implementing it as a web application.
 

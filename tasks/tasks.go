@@ -2,15 +2,17 @@ package tasks
 
 import "errors"
 
+var ErrCantAddEmptyTask = errors.New("Can't add an empty task")
+
 type Task struct {
-	description string
+	Description string
 }
 
-func (t *Task) New(task string) error {
-	if task == "" {
-		return errors.New("Error: Can't add an empty task")
+func (t *Task) New(text string) error {
+	if text == "" {
+		return ErrCantAddEmptyTask
 	}
+	t.Description = text
 
-	t.description = task
 	return nil
 }
