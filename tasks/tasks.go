@@ -1,6 +1,11 @@
 package tasks
 
-import "errors"
+import (
+	"bufio"
+	"errors"
+	"os"
+	"strings"
+)
 
 var ErrCantAddEmptyTask = errors.New("Can't add an empty task")
 
@@ -15,4 +20,25 @@ func (t *Task) New(text string) error {
 	t.Description = text
 
 	return nil
+}
+
+func ReadTasks(filename string) ([]string, error) {
+	result := []string{}
+
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, errors.New("Error could not open file")
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, "- [ ] ") {
+			result = append(result, line)
+		}
+	}
+
+	return result, nil
 }

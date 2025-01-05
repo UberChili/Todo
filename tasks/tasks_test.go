@@ -1,8 +1,12 @@
 package tasks
 
 import (
+	"fmt"
+	"reflect"
 	"testing"
 )
+
+const inputFile = "test.md"
 
 func TestAdd(t *testing.T) {
 	t.Run("Giving only task description as input", func(t *testing.T) {
@@ -32,9 +36,22 @@ func TestAdd(t *testing.T) {
 			t.Errorf("got %q, want %q", got, input)
 		}
 	})
+}
 
-	t.Run("Giving due format", func(t *testing.T) {
-		// TODO
+func TestReadLines(t *testing.T) {
+	t.Run("Getting lines that are correct tasks", func(t *testing.T) {
+		want := []string{"- [ ] Buy eggs", "- [ ] Buy milk", "- [ ] Start working on todo CLI app"}
+
+		got, err := ReadTasks(inputFile)
+		assertError(t, err, nil)
+
+		for _, line := range got {
+			fmt.Println(line)
+		}
+
+		if !reflect.DeepEqual(want, got) {
+			t.Errorf("Got %q, want %q", got, want)
+		}
 	})
 }
 
