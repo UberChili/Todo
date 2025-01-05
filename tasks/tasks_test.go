@@ -45,7 +45,22 @@ func TestReadLines(t *testing.T) {
 	t.Run("Reading a file with correct tasks", func(t *testing.T) {
 		want := []string{"- [ ] Buy eggs", "- [ ] Buy milk", "- [ ] Start working on todo CLI app"}
 
-		got, err := ReadTasks(inputFile)
+		got, err := ReadOpenTasks(inputFile)
+		assertError(t, err, nil)
+
+		for _, line := range got {
+			fmt.Println(line)
+		}
+
+		if !reflect.DeepEqual(want, got) {
+			t.Errorf("Got %q, want %q", got, want)
+		}
+	})
+
+	t.Run("Reading completed tasks", func(t *testing.T) {
+		want := []string{"- [x] This is a completed task", "- [x] Made some progress with my project today"}
+
+		got, err := ReadClosedTasks(inputFile)
 		assertError(t, err, nil)
 
 		for _, line := range got {

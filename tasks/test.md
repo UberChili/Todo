@@ -9,3 +9,6 @@ When adding a new task, it should be added as a new line with the correct syntax
 If a task is marked as completed, the program must update said task in the file as well. For example:
 
 - [ ] Start working on todo CLI app
+
+- [x] This is a completed task
+- [x] Made some progress with my project today
