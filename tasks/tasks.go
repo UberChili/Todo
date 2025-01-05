@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
-var ErrCantAddEmptyTask = errors.New("Can't add an empty task")
+var (
+	ErrCantAddEmptyTask = errors.New("Can't add an empty task")
+	ErrCouldNotOpenFile = errors.New("Could not open file")
+)
 
 type Task struct {
 	Description string
@@ -27,7 +30,7 @@ func ReadTasks(filename string) ([]string, error) {
 
 	file, err := os.Open(filename)
 	if err != nil {
-		return nil, errors.New("Error could not open file")
+		return nil, ErrCouldNotOpenFile
 	}
 	defer file.Close()
 

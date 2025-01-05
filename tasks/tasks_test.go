@@ -6,7 +6,10 @@ import (
 	"testing"
 )
 
-const inputFile = "test.md"
+const (
+	inputFile        = "test.md"
+	inputFileNoTasks = "testempty.md"
+)
 
 func TestAdd(t *testing.T) {
 	t.Run("Giving only task description as input", func(t *testing.T) {
@@ -39,7 +42,7 @@ func TestAdd(t *testing.T) {
 }
 
 func TestReadLines(t *testing.T) {
-	t.Run("Getting lines that are correct tasks", func(t *testing.T) {
+	t.Run("Reading a file with correct tasks", func(t *testing.T) {
 		want := []string{"- [ ] Buy eggs", "- [ ] Buy milk", "- [ ] Start working on todo CLI app"}
 
 		got, err := ReadTasks(inputFile)
@@ -48,6 +51,17 @@ func TestReadLines(t *testing.T) {
 		for _, line := range got {
 			fmt.Println(line)
 		}
+
+		if !reflect.DeepEqual(want, got) {
+			t.Errorf("Got %q, want %q", got, want)
+		}
+	})
+
+	t.Run("Reading a file with no correct tasks", func(t *testing.T) {
+		want := []string{}
+
+		got, err := ReadTasks(inputFileNoTasks)
+		assertError(t, err, nil)
 
 		if !reflect.DeepEqual(want, got) {
 			t.Errorf("Got %q, want %q", got, want)
