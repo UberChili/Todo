@@ -12,7 +12,7 @@ func main() {
 	flag.Parse()
 
 	// TODO Check if "configuration" has been set
-	if !checkConfig() {
+	if !configExists() {
 		fmt.Println("You have no tasks directory configured. Refer to documentation.")
 		return
 	}
@@ -33,11 +33,22 @@ func main() {
 	// fmt.Println(*taskList)
 }
 
-func checkConfig() bool {
+func configExists() bool {
 	directory := os.Getenv("DAILIES_DIRECTORY")
 
 	if directory == "" {
 		return false
 	}
+
+	fmt.Println(directory)
+
+	if _, err := os.Stat(directory); err != nil {
+		if os.IsNotExist(err) {
+			fmt.Println("Directory does not exist")
+			return false
+		}
+		return true
+	}
+
 	return true
 }
