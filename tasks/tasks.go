@@ -16,14 +16,12 @@ type Task struct {
 	Description string
 }
 
-func (t *Task) New(text string) error {
+func New(text string) (*Task, error) {
 	if text == "" {
-		return ErrCantAddEmptyTask
+		return nil, ErrCantAddEmptyTask
 	}
 
-	t.Description = text
-
-	return nil
+	return &Task{Description: text}, nil
 }
 
 func ReadOpenTasks(filename string) ([]string, error) {
