@@ -27,11 +27,13 @@ func main() {
 
 	tasklist, err := tasks.ReadOpenTasks(filename)
 	if err != nil {
-		fmt.Println("You have no open tasks! Free day!" + err.Error()) // Remember to delete the error, just testing
+		fmt.Println("You have no open tasks! Free day!")
 		return
 	}
 
+	// Deleting a task, specified by id
 	if *delTask > 0 {
+		// Checking if valid task
 		if *delTask < 1 || *delTask > len(tasklist) {
 			fmt.Printf("Task %d does not exist.", *delTask)
 			return
@@ -45,11 +47,6 @@ func main() {
 		config.ListOpenTasks(tasklist)
 		return
 	}
-
-	// TODO
-	// Mark a task as completed.
-	// 1. Remove from tasks slice
-	// 2. Mark completed (by editing the .md file)
 
 	if *taskPtr != "" {
 		// We do not necessarily list open tasks
@@ -71,7 +68,4 @@ func main() {
 		config.ListOpenTasks(tasklist)
 		return
 	}
-
-	// fmt.Println(*taskPtr)
-	// fmt.Println(*taskList)
 }
