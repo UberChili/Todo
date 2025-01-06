@@ -3,7 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
+	"time"
+
+	"github.com/UberChili/todoapp/config"
+	"github.com/UberChili/todoapp/tasks"
 )
 
 func main() {
@@ -11,10 +14,31 @@ func main() {
 	taskList := flag.Bool("l", true, "Lists open tasks")
 	flag.Parse()
 
-	// TODO Check if "configuration" has been set
-	if !configExists() {
+	filename := time.Now().Format("2006-01-02")
+	fmt.Println(filename)
+
+	directory, exists := config.ConfigExists()
+	if !exists {
 		fmt.Println("You have no tasks directory configured. Refer to documentation.")
 		return
+	}
+
+	fmt.Println(directory)
+
+	filename = directory + "/" + filename + ".md"
+
+	// TODO
+	// List all open tasks in the dailies file.
+	// Now that I think about it... This is probably the easiest thing and
+	// should be implemented first
+	tasks, err := tasks.ReadOpenTasks(filename)
+	if err != nil {
+		fmt.Println("You have no open tasks! Free day!" + err.Error()) // Remember to delete the error, just testing
+		return
+	}
+
+	for _, task := range tasks {
+		fmt.Println(task)
 	}
 
 	if *taskPtr != "" {
@@ -27,28 +51,12 @@ func main() {
 		// 3. If it doesn't exist, create file in correct directory
 		// 4. Open file
 		// 5. Get to end of File and write new task
+		//
+		// We should just use a function. Something like:
+		// AddNewTask(*taskPtr, date)
+
 	}
 
 	// fmt.Println(*taskPtr)
 	// fmt.Println(*taskList)
-}
-
-func configExists() bool {
-	directory := os.Getenv("DAILIES_DIRECTORY")
-
-	if directory == "" {
-		return false
-	}
-
-	fmt.Println(directory)
-
-	if _, err := os.Stat(directory); err != nil {
-		if os.IsNotExist(err) {
-			fmt.Println("Directory does not exist")
-			return false
-		}
-		return true
-	}
-
-	return true
 }

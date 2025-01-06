@@ -20,6 +20,7 @@ func (t *Task) New(text string) error {
 	if text == "" {
 		return ErrCantAddEmptyTask
 	}
+
 	t.Description = text
 
 	return nil
