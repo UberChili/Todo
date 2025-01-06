@@ -76,3 +76,52 @@ func ReadTasks(filename string) ([]string, error) {
 
 	return result, nil
 }
+
+func CompleteTask(filename string, taskNum int) error {
+	taskNum = taskNum - 1
+	lines := []string{}
+
+	file, err := os.Open(filename)
+	if err != nil {
+		return ErrCouldNotOpenFile
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	counter := 0
+	for scanner.Scan() {
+		line := scanner.Text()
+		if strings.HasPrefix(line, "- [ ] ") {
+			if counter == taskNum {
+				line = strings.TrimPrefix(line, "- [ ] ")
+				line = "- [x] " + line
+			}
+			counter++
+		}
+		lines = append(lines, line)
+	}
+
+	file, err = os.Create(filename)
+	if err != nil {
+		return ErrCouldNotOpenFile
+	}
+	defer file.Close()
+
+	writer := bufio.NewWriter(file)
+
+	for _, line := range lines {
+		_, err := writer.WriteString(line + "\n")
+		if err != nil {
+			return err
+		}
+	}
+
+	// Ensure everything is written to the file
+	err = writer.Flush()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

@@ -10,12 +10,12 @@ import (
 )
 
 func main() {
-	taskPtr := flag.String("add", "", "A new task to add (use quotes for multiple words, e.g., -add \"Buy groceries\")")
-	taskList := flag.Bool("l", true, "Lists open tasks")
+	taskPtr := flag.String("add", "", "A new task to add (use quotes for multiple words, e.g., -add \"Buy groceries\").")
+	taskList := flag.Bool("l", true, "Lists open tasks.")
+	delTask := flag.Int("r", 0, "Remove a task by specifing id.")
 	flag.Parse()
 
 	filename := time.Now().Format("2006-01-02")
-	fmt.Println(filename)
 
 	directory, exists := config.ConfigExists()
 	if !exists {
@@ -23,23 +23,33 @@ func main() {
 		return
 	}
 
-	fmt.Println(directory)
+	filename = config.FormatFilename(directory, filename)
 
-	filename = directory + "/" + filename + ".md"
-
-	// TODO
-	// List all open tasks in the dailies file.
-	// Now that I think about it... This is probably the easiest thing and
-	// should be implemented first
-	tasks, err := tasks.ReadOpenTasks(filename)
+	tasklist, err := tasks.ReadOpenTasks(filename)
 	if err != nil {
 		fmt.Println("You have no open tasks! Free day!" + err.Error()) // Remember to delete the error, just testing
 		return
 	}
 
-	for _, task := range tasks {
-		fmt.Println(task)
+	if *delTask > 0 {
+		if *delTask < 1 || *delTask > len(tasklist) {
+			fmt.Printf("Task %d does not exist.", *delTask)
+			return
+		}
+		// Remove the task
+		tasks.CompleteTask(filename, *delTask)
+		return
 	}
+
+	if *taskList {
+		config.ListOpenTasks(tasklist)
+		return
+	}
+
+	// TODO
+	// Mark a task as completed.
+	// 1. Remove from tasks slice
+	// 2. Mark completed (by editing the .md file)
 
 	if *taskPtr != "" {
 		// We do not necessarily list open tasks
@@ -55,6 +65,11 @@ func main() {
 		// We should just use a function. Something like:
 		// AddNewTask(*taskPtr, date)
 
+	}
+
+	if *taskList {
+		config.ListOpenTasks(tasklist)
+		return
 	}
 
 	// fmt.Println(*taskPtr)

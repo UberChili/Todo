@@ -11,9 +11,6 @@ const (
 	inputFileNoTasks = "testempty.md"
 )
 
-// func TestCreateTasks(t *testing.T) {
-// }
-
 func TestAdd(t *testing.T) {
 	t.Run("Giving only task description as input", func(t *testing.T) {
 		input := "Buy Coca-Cola"
