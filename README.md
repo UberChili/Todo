@@ -19,7 +19,8 @@ The idea is to be able to have a CLI interface to quickly "migrate" activities, 
 git clone git@github.com:UberChili/Todoapp.git
 ```
 
-2. Set an environment variable in your profile, that points to your Dailies directory
+2. Set an environment variable in your profile that points to your dailies directory.
+
 For example, mine is:
 
 ``` sh
@@ -44,7 +45,9 @@ todo
 2       Buy eggs
 3       Buy milk
 ```
-This will list your open tasks in the format shown above. All your open tasks will use markdown format in its corresponding file. For example, a file opened in a text editor would look like this:
+This will list your open tasks in the format shown above. All your open tasks will use markdown format in its corresponding file.
+
+For example, a file opened in a text editor would look like this:
 ``` sh
 ## Work
 - [x] Start working on todo CLI app
@@ -55,9 +58,7 @@ This will list your open tasks in the format shown above. All your open tasks wi
 - [ ] Buy eggs
 - [ ] Buy milk
 ```
-
-To remove a task, specify its id:
-
+To remove a task, use "-r" and specify its id:
 ``` sh
 todo -r 2
 
@@ -67,4 +68,6 @@ todo
 2       Buy milk
 ```
 
-## TODO Add new task
+## TODO
+- Add new task
+- Prettier formatting
