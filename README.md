@@ -40,10 +40,20 @@ List your open tasks like:
 
 ``` sh
 todo
+1       Configure NeoVim
+2       Buy eggs
+3       Buy milk
+```
+This will list your open tasks in the format shown above. All your open tasks will use markdown format in its corresponding file. For example, a file opened in a text editor would look like this:
+``` sh
+## Work
+- [x] Start working on todo CLI app
+- [x] This is a completed task
+- [ ] Configure NeoVim
 
-1       - [ ] Buy eggs
-2       - [ ] Buy milk
-3       - [ ] Start working on todo CLI app
+## Store
+- [ ] Buy eggs
+- [ ] Buy milk
 ```
 
 To remove a task, specify its id:
@@ -53,8 +63,8 @@ todo -r 2
 
 todo
 
-1       - [ ] Buy eggs
-2       - [ ] Start working on todo CLI app
+1       Configure NeoVim
+2       Buy milk
 ```
 
 ## TODO Add new task
