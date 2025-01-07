@@ -28,13 +28,19 @@ func main() {
 	tasklist, err := tasks.ReadOpenTasks(filename)
 	if err != nil {
 		fmt.Println("You have no open tasks! Free day!")
+		// return
+	}
+
+	// Add a new task
+	if *taskPtr != "" {
+		tasks.AddNewTask(filename, *taskPtr)
 		return
 	}
 
 	// Deleting a task, specified by id
 	if *delTask > 0 {
 		// Checking if valid task
-		if *delTask < 1 || *delTask > len(tasklist) {
+		if *delTask > len(tasklist) {
 			fmt.Printf("Task %d does not exist.", *delTask)
 			return
 		}
@@ -43,27 +49,7 @@ func main() {
 		return
 	}
 
-	if *taskList {
-		config.ListOpenTasks(tasklist)
-		return
-	}
-
-	if *taskPtr != "" {
-		// We do not necessarily list open tasks
-		*taskList = false
-
-		// TODO
-		// 1. Get today's date
-		// 2. Check if daily file with today's date as title already exists
-		// 3. If it doesn't exist, create file in correct directory
-		// 4. Open file
-		// 5. Get to end of File and write new task
-		//
-		// We should just use a function. Something like:
-		// AddNewTask(*taskPtr, date)
-
-	}
-
+	// List open tasks, this is the default behavior when no argument or flag is given
 	if *taskList {
 		config.ListOpenTasks(tasklist)
 		return

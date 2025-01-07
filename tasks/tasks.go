@@ -3,6 +3,7 @@ package tasks
 import (
 	"bufio"
 	"errors"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -124,4 +125,60 @@ func CompleteTask(filename string, taskNum int) error {
 	}
 
 	return nil
+}
+
+func AddNewTask(filename, task string) error {
+	task = "- [ ] " + task
+	newContents := []string{}
+
+	// If file doesn't exist yet
+	if _, err := os.Stat(filename); errors.Is(err, os.ErrNotExist) {
+		fmt.Printf("File doesn't exist, creating new file with name %s in dailies directory\n", filename)
+		file, err := os.Create(filename)
+		if err != nil {
+			return ErrCouldNotOpenFile
+		}
+		defer file.Close()
+
+		writer := bufio.NewWriter(file)
+		_, err = writer.WriteString(task + "\n")
+		if err != nil {
+			return err
+		}
+
+		// Ensure everything is written
+		return writer.Flush()
+	}
+
+	// Read existing file contents
+	file, err := os.Open(filename)
+	if err != nil {
+		return ErrCouldNotOpenFile
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		newContents = append(newContents, line)
+	}
+	newContents = append(newContents, task) // Append new task
+
+	// Reopen file in write mode
+	file, err = os.Create(filename) // Overwrites file with new contents
+	if err != nil {
+		return ErrCouldNotOpenFile
+	}
+	defer file.Close()
+
+	writer := bufio.NewWriter(file)
+	for _, line := range newContents {
+		_, err := writer.WriteString(line + "\n")
+		if err != nil {
+			return err
+		}
+	}
+
+	// Ensure everything is written
+	return writer.Flush()
 }

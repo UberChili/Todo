@@ -67,7 +67,27 @@ todo
 1       Configure NeoVim
 2       Buy milk
 ```
+Add a new task using the -add flag:
+
+``` sh
+$ todo -add "Write some code"
+$ todo
+
+1       Write some code
+```
+This will check if the file with the correct nomenclature already exists. If it doesn't, it will create it and add the new and only task. If it already exists, it will append the new task to the end of the file.
+
+At first, I was considering the idea about establishing a special format or area for the tasks, something that, with some existing tasks and after creating a new task, in markdown could look like:
+``` markdown
+# Tasks for the day
+- [ ] Buy eggs
+- [ ] Buy milk
+- [ ] New example would be inserted right here, and not in the end of the file.
+
+This is some example test that was contained in the note before adding the third task, above.
+Oh it was a good day!
+```
+I decided to not go for this approach and to instead just add new tasks at the bottom of each note because due to the usage of Markdown files as notes, the user could enter new tasks anywhere in the file. Maybe the user wants to add a task especifically next to some text block in order to remember some relationship. It would not be nice to alter that every time we add a new task. 
 
 ## TODO
-- Add new task
-- Prettier formatting
+- Prettier formatting. Maybe some colors or maybe using a library to make this a real TUI.
