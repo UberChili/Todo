@@ -1,13 +1,15 @@
 # Introduction
 This is a personal project.
 
-The basic idea is to tackle the classic to-do application but with a CLI functionality instead of the typical method of implementing it as a web application.
+The basic idea is to implement the classic to-do application but with a CLI functionality instead of the typical method of implementing it as a web application. This is because I plan to use this myself for personal use in my daily life, and because I really like using the terminal.
 
 # Integration with bullet journaling and Obsidian
-The greater idea behind this is that I've been using a classic physical Bullet Journal in my day to day, in order to write down some stuff, like thoughts, activities, appointments, and other things. This is as flexible as it can be considering it is pen and paper.
-However, I also use Obsidian on my devices to take notes. Obsidian has a "Dailies" functionality which allows the user to create a new note for that specific day.
+I've been using a classic physical Bullet Journal in my day to day, in order to write down some stuff, like thoughts, activities, appointments, and other things. This is as flexible as it can be considering it is pen and paper. There is a great deal of flexibility about being able to use pen and paper for taking every day notes.
+However, I also spend a lot of time in the computer and like terminal applications. I also use Obsidian on my devices to take and sync notes. This is very useful considering Obsidian's mobile application.
 
-The idea is to be able to have a CLI interface to quickly "migrate" activities, todo elements, or appointments to my PC, so that I can quickly take a look at them from the terminal. At the same time, I want the tasks to be written into the Daily Note in my Obsidian Vault. This way, I can have access to my tasks on paper and on all my devices. It sounds simple enough but it should make for a small but decent improvement of productivity.
+Obsidian has a "Dailies" functionality which allows the user to create a new note for that specific day.
+
+The idea is to be able to have a CLI interface to "migrate" activities, todo elements, or appointments to be able to view them on my computers, so that I can quickly take a look at them from the terminal, like this, I want the tasks to be written into the Daily Note in my Obsidian Vault. This way, I can have access to my tasks on paper and on all my devices, eve my phone! It sounds simple enough but it should make for a small but decent improvement of productivity.
 
 # Prerequisites
 - Go 1.16 or later
