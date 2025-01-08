@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/UberChili/todoapp/config"
-	"github.com/UberChili/todoapp/tasks"
+	"github.com/UberChili/todo/config"
+	"github.com/UberChili/todo/tasks"
 )
 
 func main() {
