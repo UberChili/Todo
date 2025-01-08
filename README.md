@@ -37,12 +37,19 @@ go build -o todo
 # or:
 go run .
 ```
+Or directly install, if your Gopath has been configured:
+
+``` sh
+go install
+```
+This will let you use the program calling *todo* anywhere.
 
 # Usage
 List your open tasks like:
 
 ``` sh
 todo
+id      Task
 1       Configure NeoVim
 2       Buy eggs
 3       Buy milk
@@ -66,6 +73,7 @@ todo -r 2
 
 todo
 
+id      Task
 1       Configure NeoVim
 2       Buy milk
 ```
